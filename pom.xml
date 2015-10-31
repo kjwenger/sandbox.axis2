@@ -6,7 +6,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Axis2 SimpleService</name>
 	<url>http://www.myorganization.org</url>
-	
 	<build>
 		<finalName>sandbox.axis2</finalName>
 		<plugins>
@@ -15,8 +14,8 @@
 				<!--  Maven compiler plugin -->
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<optimize>true</optimize>
 				</configuration>
 			</plugin>
@@ -180,6 +179,11 @@
 			<artifactId>junit</artifactId>
 			<version>3.8.1</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.u14n</groupId>
+			<artifactId>sandbox.model</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	
