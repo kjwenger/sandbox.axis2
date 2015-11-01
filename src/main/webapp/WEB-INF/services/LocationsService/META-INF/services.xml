@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serviceGroup>
+
+	<service name="LocationsService">
+		<!-- <parameter name="ServiceObjectSupplier" locked="false"> org.apache.axis2.extensions.spring.receivers.SpringServletContextObjectSupplier 
+			</parameter> -->
+		<!-- <parameter name="SpringBeanName" locked="false">myService</parameter> -->
+		<parameter name="ServiceClass">com.u14n.sandbox.axis2.LocationsService</parameter>
+		<operation name="findByName">
+			<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+		<!-- <module ref="counterModule"/> -->
+	</service>
+
+	<service name="LocationsServiceById">
+		<parameter name="ServiceClass">com.u14n.sandbox.axis2.LocationsService</parameter>
+		<operation name="findById">
+			<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+	</service>
+
+	<service name="LocationsServiceAll">
+		<parameter name="ServiceClass">com.u14n.sandbox.axis2.LocationsService</parameter>
+		<operation name="findAll">
+			<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+	</service>
+
+</serviceGroup>

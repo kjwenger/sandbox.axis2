@@ -1,17 +1,26 @@
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.u14n</groupId>
 	<artifactId>sandbox.axis2</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Axis2 SimpleService</name>
+	<name>Axis2 LocationsService</name>
 	<url>http://www.myorganization.org</url>
 	<build>
 		<finalName>sandbox.axis2</finalName>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.axis</groupId>
+					<artifactId>wsdl2java-maven-plugin</artifactId>
+					<version>1.4.1-SNAPSHOT</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 			<plugin>
-				
-				<!--  Maven compiler plugin -->
+				<!-- Maven compiler plugin -->
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
 					<source>1.8</source>
@@ -19,8 +28,7 @@
 					<optimize>true</optimize>
 				</configuration>
 			</plugin>
-			
-			<!--  Maven jetty plugin -->
+			<!-- Maven jetty plugin -->
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
@@ -30,47 +38,61 @@
 					</webAppConfig>
 				</configuration>
 			</plugin>
-			
-			<!--  Maven axis2M plugin -->
+
+			<!-- Maven axis2M plugin -->
 			<plugin>
 				<groupId>org.axis2m</groupId>
 				<artifactId>axis2m-plugins</artifactId>
 				<version>1.0M2</version>
-				
+
 				<!-- Uncomment with Jetty -->
-				<!--
-				<configuration>
-					<wsdlFile>http://localhost:8080/services/SimpleService?wsdl</wsdlFile>					
-				</configuration>	-->
+				<!-- <configuration> <wsdlFile>http://localhost:8080/services/LocationsService?wsdl</wsdlFile> 
+					</configuration> -->
 			</plugin>
-			
-			<!--  Maven axis2 AAR plugin -->
+
+			<!-- Maven axis2 AAR plugin -->
 			<plugin>
 				<groupId>org.apache.axis2</groupId>
 				<artifactId>axis2-aar-maven-plugin</artifactId>
 				<version>1.4.1</version>
 				<configuration>
 					<servicesXmlFile>
-						src/main/webapp/WEB-INF/services/SimpleService/META-INF/services.xml</servicesXmlFile>
+						src/main/webapp/WEB-INF/services/LocationsService/META-INF/services.xml</servicesXmlFile>
 				</configuration>
-		<!--
-			<executions>
-				<execution>
-				   <phase>package</phase>
-				   <goals>
-				      <goal>aar</goal>
-				   </goals>
-				</execution>
-			</executions>
-			
-			-->
+				<!-- <executions> <execution> <phase>package</phase> <goals> <goal>aar</goal> 
+					</goals> </execution> </executions> -->
 			</plugin>
-			
+			<plugin>
+				<groupId>org.apache.axis</groupId>
+				<artifactId>wsdl2java-maven-plugin</artifactId>
+				<version>1.4.1-SNAPSHOT</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18.1</version>
+				<configuration>
+					<useFile>false</useFile>
+					<disableXmlReport>true</disableXmlReport>
+					<includes>
+						<include>**/*Test.*</include>
+						<include>**/*Suite.*</include>
+						<include>**/*Features.*</include>
+						<include>**/*Specs.*</include>
+					</includes>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-	
+
 	<dependencies>
-		<!-- -->
+		<!-- domain dependencies -->
+		<dependency>
+			<groupId>com.u14n</groupId>
+			<artifactId>sandbox.model</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- plug-in dependencies -->
 		<dependency>
 			<groupId>org.apache.axis2</groupId>
 			<artifactId>axis2</artifactId>
@@ -101,7 +123,7 @@
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.0.1</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.woden</groupId>
 			<artifactId>woden-api</artifactId>
@@ -117,7 +139,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.woden</groupId>
 			<artifactId>woden-impl-dom</artifactId>
@@ -133,7 +155,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>backport-util-concurrent</groupId>
 			<artifactId>backport-util-concurrent</artifactId>
@@ -149,44 +171,39 @@
 			<artifactId>commons-logging</artifactId>
 			<version>1.1</version>
 		</dependency>
-		
-		<!--	
-	<dependency>
-		<groupId>cglib</groupId>
-		<artifactId>cglib-nodep</artifactId>
-		<version>2.1_3</version>
-		<optional>true</optional>
-	</dependency>
-	-->
-		
+
+		<!-- <dependency> <groupId>cglib</groupId> <artifactId>cglib-nodep</artifactId> 
+			<version>2.1_3</version> <optional>true</optional> </dependency> -->
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.9</version>
 		</dependency>
-		
-		<!--optional  dependencies-->
-		
+
+		<!--optional dependencies -->
+
 		<dependency>
 			<groupId>org.apache.ws.commons.neethi</groupId>
 			<artifactId>neethi</artifactId>
 			<version>2.0</version>
 		</dependency>
-		
+
 		<!-- test dependencies -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.u14n</groupId>
-			<artifactId>sandbox.model</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.5</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<repositories>
 		<repository>
 			<id>axis2m</id>
@@ -194,21 +211,25 @@
 			<url>http://axis2m.sourceforge.net/repo/</url>
 		</repository>
 	</repositories>
-	
+
 	<pluginRepositories>
 		<pluginRepository>
 			<id>axis2m</id>
 			<name>Axis2m Repository</name>
 			<url>http://axis2m.sourceforge.net/repo/</url>
 		</pluginRepository>
+		<pluginRepository>
+			<id>m3</id>
+			<name>Maven 3 Repository</name>
+			<url>http://repo1.maven.org/maven/</url>
+		</pluginRepository>
 	</pluginRepositories>
-	
+
 	<properties>
 		<axis2ReleaseVersion>1.4.1</axis2ReleaseVersion>
 		<axiomReleaseVersion>1.2.7</axiomReleaseVersion>
 		<wodenReleaseVersion>1.0M8</wodenReleaseVersion>
 		<neethiReleaseVersion>2.0</neethiReleaseVersion>
 		<rampartReleaseVersion>1.4.1</rampartReleaseVersion>
-		
 	</properties>
 </project>
