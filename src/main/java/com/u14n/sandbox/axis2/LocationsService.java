@@ -1,7 +1,7 @@
 package com.u14n.sandbox.axis2;
 
-import com.u14n.sandbox.model.LocationDAO;
-import com.u14n.sandbox.model.Location;
+import com.u14n.sandbox.model.geography.LocationDAO;
+import com.u14n.sandbox.model.geography.Location;
 import com.u14n.sandbox.model.DAOException;
 
 import java.util.List;
@@ -13,39 +13,41 @@ public class LocationsService {
 	public LocationsService() {
 		try {
 			this.locationDAO.insert(new Location(
-				"USA",
-				"NC",
-				"27601",
-				"Raleigh",
-				"500 S McDowell St"));
+					"USA",
+					"NC",
+					"27601",
+					"Raleigh",
+					"S McDowell St",
+					"500"));
 			this.locationDAO.insert(new Location(
 					"USA",
 					"NC",
 					"27601",
 					"Raleigh",
-					"100 E Davie Street"));
+					"E Davie Street",
+					"100"));
 		} catch (DAOException e) {
 			// Ignore
 		}
 	}
 
-	public Location findById(int id) throws DAOException {
-		/* trace */ System.out.println("LocationsService.findById() id=" + id);
-		Location location = this.locationDAO.findById(id);
-		/* trace */ System.out.println("LocationsService.findById() location=" + location);
+	public Location findByIdentity(int id) throws DAOException {
+																				System.out.println("LocationsService.findByIdentity() id=" + id);
+		Location location = this.locationDAO.findByIdentity(id);
+																				System.out.println("LocationsService.findByIdentity() location=" + location);
 		return location;
 	}
 
 	public List<Location> findByName(String name) throws DAOException {
-		/* trace */ System.out.println("LocationsService.findByName() name=" + name);
+																				System.out.println("LocationsService.findByName() name=" + name);
 		List<Location> list = this.locationDAO.findAll(); // this.locationDAO.findByName(name);
-		/* trace */ System.out.println("LocationsService.findByName() list.size()=" + list.size());
+																				System.out.println("LocationsService.findByName() list.size()=" + list.size());
 		return list;
 	}
 
 	public List<Location> findAll() throws DAOException {
 		List<Location> list = this.locationDAO.findAll();
-		/* trace */ System.out.println("LocationsService.findAll() list.size()=" + list.size());
+																				System.out.println("LocationsService.findAll() list.size()=" + list.size());
 		return list;
 	}
 
